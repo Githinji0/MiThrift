@@ -1,0 +1,16 @@
+{
+  "name": "MiThrift - Campus Thrift Store",
+  "short_name": "MiThrift",
+  "description": "Curated secondhand campus essentials. 1-of-1 items with campus pickup.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF9F5",
+  "theme_color": "#5E6F3D",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
