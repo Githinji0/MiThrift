@@ -15,14 +15,14 @@ export default function FlashDropsPage() {
   const { drops, products } = useStore();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-10">
-      {/* 1. Hero Header Banner */}
-      <FadeIn className="relative bg-[#EFEAE1] rounded-[2.5rem] sm:rounded-[3.25rem] p-6 sm:p-10 lg:p-12 overflow-hidden shadow-card text-center space-y-4">
+    <div className="space-y-10 sm:space-y-14 pb-12">
+      {/* 1. Full-Screen Width Hero Header Banner */}
+      <FadeIn className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-[#EFEAE1] py-12 sm:py-16 lg:py-20 overflow-hidden shadow-subtle">
         {/* Ambient background glows */}
-        <div className="absolute -top-10 -right-10 w-72 h-72 bg-[#5E6F3D]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-[#7A8C53]/15 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute -top-10 -right-10 w-96 h-96 bg-[#5E6F3D]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-10 -left-10 w-96 h-96 bg-[#7A8C53]/15 rounded-full blur-2xl pointer-events-none" />
 
-        <div className="relative z-10 space-y-3">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-4 relative z-10">
           <div className="inline-flex items-center gap-2 bg-[#FAF9F5] px-4 py-1.5 rounded-full shadow-subtle">
             <Sparkles className="w-3.5 h-3.5 text-[#5E6F3D]" />
             <span className="text-[11px] font-black uppercase tracking-wider text-[#5E6F3D]">
@@ -30,7 +30,7 @@ export default function FlashDropsPage() {
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#1F201D] font-heading tracking-tight leading-[1.05] uppercase">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#1F201D] font-heading tracking-tight leading-[1.05] uppercase">
             Curated Flash Drops <br />
             <span className="text-[#5E6F3D]">& Re-stocks.</span>
           </h1>
@@ -38,27 +38,27 @@ export default function FlashDropsPage() {
           <p className="text-xs sm:text-sm text-[#6E6D68] max-w-lg mx-auto leading-relaxed">
             Instead of endless messy feeds, MiThrift releases inspected student essentials in curated batch drops. Limited 1-of-1 pieces with campus pickup.
           </p>
-        </div>
 
-        {/* Feature Pills */}
-        <div className="relative z-10 pt-2 flex flex-wrap items-center justify-center gap-2.5 sm:gap-4">
-          <div className="flex items-center gap-1.5 bg-[#FAF9F5]/90 px-3.5 py-1.5 rounded-full text-[11px] font-bold text-[#1F201D] shadow-subtle">
-            <Zap className="w-3.5 h-3.5 text-amber-500" />
-            <span>First-Come Reservations</span>
-          </div>
-          <div className="flex items-center gap-1.5 bg-[#FAF9F5]/90 px-3.5 py-1.5 rounded-full text-[11px] font-bold text-[#1F201D] shadow-subtle">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-            <span>100% Quality Inspected</span>
-          </div>
-          <div className="flex items-center gap-1.5 bg-[#FAF9F5]/90 px-3.5 py-1.5 rounded-full text-[11px] font-bold text-[#1F201D] shadow-subtle">
-            <Package className="w-3.5 h-3.5 text-[#5E6F3D]" />
-            <span>Same-Day Campus Pickup</span>
+          {/* Feature Pills */}
+          <div className="pt-3 flex flex-wrap items-center justify-center gap-2.5 sm:gap-4">
+            <div className="flex items-center gap-1.5 bg-[#FAF9F5]/90 px-3.5 py-1.5 rounded-full text-[11px] font-bold text-[#1F201D] shadow-subtle">
+              <Zap className="w-3.5 h-3.5 text-amber-500" />
+              <span>First-Come Reservations</span>
+            </div>
+            <div className="flex items-center gap-1.5 bg-[#FAF9F5]/90 px-3.5 py-1.5 rounded-full text-[11px] font-bold text-[#1F201D] shadow-subtle">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+              <span>100% Quality Inspected</span>
+            </div>
+            <div className="flex items-center gap-1.5 bg-[#FAF9F5]/90 px-3.5 py-1.5 rounded-full text-[11px] font-bold text-[#1F201D] shadow-subtle">
+              <Package className="w-3.5 h-3.5 text-[#5E6F3D]" />
+              <span>Same-Day Campus Pickup</span>
+            </div>
           </div>
         </div>
       </FadeIn>
 
-      {/* 2. Fluid Drops List */}
-      <div className="space-y-10 sm:space-y-14">
+      {/* 2. Fluid Drops List (Constrained in Grid) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-10 sm:space-y-14">
         {drops.map((drop, idx) => {
           const dropProducts = products.filter(
             (p) => p.dropId === drop.id || drop.productIds.includes(p.id)

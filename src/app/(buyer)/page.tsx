@@ -10,7 +10,15 @@ import { ProductGrid } from '@/components/buyer/ProductGrid';
 import { QualityBadges } from '@/components/buyer/QualityBadges';
 import { DropCountdown } from '@/components/buyer/DropCountdown';
 import { EditorialHero } from '@/components/buyer/EditorialHero';
+import { WavyCategoryCarousel } from '@/components/buyer/WavyCategoryCarousel';
 import { FadeIn, ScaleIn, StaggerContainer, StaggerItem } from '@/components/ui/MotionWrapper';
+import {
+  DoodleLoopArrowUpRight,
+  DoodleCurveArrowDown,
+  DoodleLoopArrowLeft,
+  DoodleSparkle,
+  DoodlePointerArrow,
+} from '@/components/ui/DoodleArrows';
 import { CATEGORIES } from '@/lib/constants';
 
 export default function HomePage() {
@@ -25,24 +33,30 @@ export default function HomePage() {
       {/* Editorial High-Impact Hero Section */}
       <EditorialHero />
 
-      {/* Featured Flash Drop Section */}
+      {/* Featured Flash Drop Section (Full-Width Edge-to-Edge, No Border Radius) */}
       {featuredDrop && (
-        <FadeIn className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="bg-charcoal text-canvas rounded-[2.5rem] p-6 sm:p-10 relative overflow-hidden shadow-float">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <FadeIn className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-charcoal text-canvas py-12 sm:py-16 overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            {/* Doodle arrow in header of drop */}
+            <div className="hidden lg:block absolute top-2 right-72 text-amber-400/40 pointer-events-none">
+              <DoodleLoopArrowUpRight className="w-14 h-14" />
+            </div>
+
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
               <div className="space-y-2 text-center md:text-left">
-                <div className="flex items-center justify-center md:justify-start gap-2">
-                  <span className="text-xs font-bold text-amber-400 uppercase tracking-widest bg-amber-400/10 px-3.5 py-1 rounded-full">
+                <div className="flex items-center justify-center md:justify-start gap-2.5">
+                  <span className="text-xs font-black uppercase tracking-widest text-amber-400 font-heading">
                     FEATURED FLASH DROP
                   </span>
-                  <span className="text-xs text-muted-clay font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400/40" />
+                  <span className="font-playful text-base sm:text-lg font-bold text-canvas/85 tracking-wide">
                     {featuredDrop.productIds.length} Curated Items
                   </span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold font-heading text-canvas">
+                <h2 className="text-2xl sm:text-4xl font-extrabold font-heading text-canvas tracking-tight">
                   {featuredDrop.name}
                 </h2>
-                <p className="text-sm text-muted-clay max-w-lg">{featuredDrop.description}</p>
+                <p className="text-sm text-muted-clay max-w-lg leading-relaxed">{featuredDrop.description}</p>
               </div>
 
               <div className="flex flex-col items-center md:items-end gap-3">
@@ -61,61 +75,15 @@ export default function HomePage() {
             </div>
 
             {/* Drop Items Preview Grid */}
-            <div className="mt-8 pt-6">
+            <div className="mt-10 pt-4 relative z-10">
               <ProductGrid products={featuredProducts} />
             </div>
           </div>
         </FadeIn>
       )}
 
-      {/* Category Grid Section */}
-      <FadeIn className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h2 className="text-2xl font-extrabold text-charcoal font-heading">
-              Browse Categories
-            </h2>
-            <p className="text-xs text-muted-clay mt-0.5">Find campus essentials by type</p>
-          </div>
-          <Link
-            href="/categories"
-            className="text-xs font-bold text-olive hover:underline flex items-center gap-1"
-          >
-            <span>View All</span>
-            <ChevronRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
-          {CATEGORIES.slice(0, 6).map((cat) => (
-            <StaggerItem key={cat.id}>
-              <motion.div whileHover={{ y: -4, scale: 1.03 }} transition={{ duration: 0.2 }}>
-                <Link
-                  href={`/shop?category=${cat.id}`}
-                  className="p-4 sm:p-5 rounded-3xl flex flex-col justify-between h-32 shadow-subtle hover:shadow-card transition-all block"
-                  style={{ backgroundColor: cat.bgHex }}
-                >
-                  <div className="flex justify-between items-start">
-                    <Tag className="w-5 h-5" style={{ color: cat.textColor }} />
-                    <span
-                      className="text-[10px] font-bold px-2 py-0.5 rounded-full shadow-subtle"
-                      style={{ backgroundColor: 'rgba(255,255,255,0.7)', color: cat.textColor }}
-                    >
-                      1-of-1
-                    </span>
-                  </div>
-                  <span
-                    className="font-bold text-xs font-heading leading-snug line-clamp-2"
-                    style={{ color: cat.textColor }}
-                  >
-                    {cat.name}
-                  </span>
-                </Link>
-              </motion.div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-      </FadeIn>
+      {/* Wavy Category Carousel Section */}
+      <WavyCategoryCarousel />
 
       {/* Fresh Arrivals Catalog Section */}
       <FadeIn className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -146,9 +114,14 @@ export default function HomePage() {
       </div>
 
       {/* Campus Pickup Explanation Banner */}
-      <FadeIn className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="bg-canvas rounded-[2.5rem] p-8 shadow-card flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="space-y-3 max-w-lg text-center md:text-left">
+      <FadeIn className="max-w-7xl mx-auto px-4 sm:px-6 relative">
+        <div className="bg-canvas rounded-[2.5rem] p-8 shadow-card flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+          {/* Subtle loop arrow in pickup banner */}
+          <div className="hidden lg:block absolute -top-2 right-1/3 text-[#5E6F3D]/25 pointer-events-none">
+            <DoodleLoopArrowLeft className="w-16 h-16" />
+          </div>
+
+          <div className="space-y-3 max-w-lg text-center md:text-left relative z-10">
             <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-olive bg-sage-light px-3.5 py-1.5 rounded-full">
               <MapPin className="w-3.5 h-3.5" />
               <span>Campus Convenience</span>
@@ -161,7 +134,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 w-full md:w-auto">
+          <div className="grid grid-cols-2 gap-3 w-full md:w-auto relative z-10">
             {[
               { name: 'Library Gate', code: 'Main Station' },
               { name: 'Student Center', code: 'Ground Lounge' },
@@ -185,18 +158,26 @@ export default function HomePage() {
       </FadeIn>
 
       {/* Sell With Us CTA Banner */}
-      <ScaleIn className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="bg-sandstone rounded-[2.5rem] p-8 sm:p-12 shadow-card text-center space-y-4">
-          <div className="w-12 h-12 rounded-2xl bg-olive text-canvas flex items-center justify-center mx-auto shadow-sm">
+      <ScaleIn className="max-w-7xl mx-auto px-4 sm:px-6 relative">
+        <div className="bg-sandstone rounded-[2.5rem] p-8 sm:p-12 shadow-card text-center space-y-4 relative overflow-hidden">
+          {/* Subtle loop arrow in sell CTA banner */}
+          <div className="hidden lg:block absolute top-8 left-12 text-[#5E6F3D]/40 pointer-events-none">
+            <DoodleLoopArrowUpRight className="w-14 h-14" />
+          </div>
+          <div className="hidden lg:block absolute bottom-8 right-12 text-[#5E6F3D]/40 pointer-events-none">
+            <DoodleCurveArrowDown className="w-12 h-12" />
+          </div>
+
+          <div className="w-12 h-12 rounded-2xl bg-olive text-canvas flex items-center justify-center mx-auto shadow-sm relative z-10">
             <Store className="w-6 h-6" />
           </div>
-          <h2 className="text-2xl font-extrabold text-charcoal font-heading">
+          <h2 className="text-2xl font-extrabold text-charcoal font-heading relative z-10">
             Got something you're done with?
           </h2>
-          <p className="text-sm text-muted-clay max-w-md mx-auto">
+          <p className="text-sm text-muted-clay max-w-md mx-auto relative z-10">
             Turn unwanted hostel gear, textbooks, appliances, or clothes into cash. Choose direct buyout or 25% consignment.
           </p>
-          <div className="pt-2">
+          <div className="pt-2 relative z-10">
             <Link
               href="/sell"
               className="inline-flex items-center gap-2 bg-olive hover:bg-olive-hover text-canvas font-bold px-8 py-3.5 rounded-full shadow-md transition-all text-sm"

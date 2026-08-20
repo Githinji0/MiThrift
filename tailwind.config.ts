@@ -43,6 +43,8 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-quicksand)", "Quicksand", "sans-serif"],
         heading: ["var(--font-quicksand)", "Quicksand", "sans-serif"],
+        playful: ["var(--font-playful)", "Caveat", "cursive"],
+        script: ["'Covered By Your Grace'", "cursive"],
       },
       boxShadow: {
         subtle: "0 2px 8px rgba(31, 32, 29, 0.04)",

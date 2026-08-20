@@ -4,6 +4,7 @@ import React from 'react';
 import { SearchCheck, Sparkles, Camera, Store, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/MotionWrapper';
+import { DoodleLoopArrowUpRight, DoodleCurveArrowDown, DoodleSparkle } from '@/components/ui/DoodleArrows';
 
 export const QualityBadges: React.FC = () => {
   const steps = [
@@ -41,7 +42,18 @@ export const QualityBadges: React.FC = () => {
 
   return (
     <FadeIn className="my-12 py-10 px-6 bg-sandstone rounded-[2.5rem] shadow-subtle relative overflow-hidden">
-      <div className="max-w-4xl mx-auto text-center mb-10">
+      {/* Background Doodle Accents */}
+      <div className="hidden lg:block absolute top-6 right-12 text-[#5E6F3D]/40 pointer-events-none">
+        <DoodleLoopArrowUpRight className="w-12 h-12" />
+      </div>
+      <div className="hidden lg:block absolute bottom-4 left-10 text-[#5E6F3D]/40 pointer-events-none">
+        <DoodleCurveArrowDown className="w-10 h-10" />
+      </div>
+      <div className="absolute top-10 left-16 text-[#5E6F3D]/50 pointer-events-none">
+        <DoodleSparkle className="w-5 h-5" />
+      </div>
+
+      <div className="max-w-4xl mx-auto text-center mb-10 relative z-10">
         <span className="text-xs font-extrabold uppercase tracking-widest text-olive bg-olive/10 px-3.5 py-1.5 rounded-full">
           Quality Guaranteed
         </span>
@@ -53,7 +65,7 @@ export const QualityBadges: React.FC = () => {
         </p>
       </div>
 
-      <StaggerContainer className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+      <StaggerContainer className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4 relative z-10">
         {steps.map((s) => {
           const IconComponent = s.icon;
           return (
